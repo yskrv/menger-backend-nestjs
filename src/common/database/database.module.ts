@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ApplicationModule } from 'src/resources/applications/application.module';
 import { UserModule } from 'src/resources/user/user.module';
 
 const { DB_URL } = process.env;
@@ -9,7 +10,8 @@ const { DB_URL } = process.env;
   imports: [
     ConfigModule,
     MongooseModule.forRoot(DB_URL),
-    UserModule
+    UserModule,
+    ApplicationModule
   ],
 })
 export class MongooseConfigModule { }

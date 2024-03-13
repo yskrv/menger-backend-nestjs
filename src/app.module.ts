@@ -3,14 +3,16 @@ import { ConfigModule } from './common/config/config.module';
 import { UserModule } from './resources/user/user.module';
 import { MongooseConfigModule } from './common/database/database.module';
 import { AuthModule } from './resources/auth/auth.module';
+import { ApplicationModule } from './resources/applications/application.module';
 
 @Module({
   imports: [
     ConfigModule,
     UserModule,
     MongooseConfigModule,
-    AuthModule
+    AuthModule,
+    ApplicationModule
   ],
-  controllers: []
+  controllers: [],
 })
 export class AppModule { }
