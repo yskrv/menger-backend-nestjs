@@ -4,6 +4,7 @@ import { UserModule } from './resources/user/user.module';
 import { MongooseConfigModule } from './common/database/database.module';
 import { AuthModule } from './resources/auth/auth.module';
 import { ApplicationModule } from './resources/applications/application.module';
+import { TranslateModule } from './resources/translate/translate.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { ApplicationModule } from './resources/applications/application.module';
     UserModule,
     MongooseConfigModule,
     AuthModule,
-    ApplicationModule
+    ApplicationModule,
+    TranslateModule
   ],
   controllers: [],
 })
