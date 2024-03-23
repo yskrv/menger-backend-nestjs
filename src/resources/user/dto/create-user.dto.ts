@@ -21,7 +21,20 @@ export class CreateUserDto {
 
   @ApiProperty({
     description: 'The password for the user account',
-    example: 'Qwerty123!',
+    example: 'Qwerty123!'
   })
   password: string;
+
+  // @ApiProperty({
+  //   description: 'Code for account activation',
+  //   example: {
+  //     code: "123456",
+  //     expiresIn: new Date()
+  //   },
+  //   required: false
+  // })
+  activationCode: {
+    code: string;
+    expiresIn: Date;
+  }
 }

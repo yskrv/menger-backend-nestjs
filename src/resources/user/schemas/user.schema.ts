@@ -2,7 +2,6 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument } from "mongoose";
 import { UserRole } from "src/utils/enums";
 
-
 export type UserDocument = HydratedDocument<User>;
 
 @Schema({ collection: "users", timestamps: true })
@@ -33,6 +32,19 @@ export class User {
 
   @Prop({ default: false })
   isActivated: boolean;
+
+  @Prop({
+    type: {
+      code: { type: String, match: /^\d{6}$/ },
+      expiresIn: { type: Date },
+    },
+    _id: false,
+    required: false
+  })
+  activationCode?: {
+    code: string;
+    expiresIn: Date;
+  };
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

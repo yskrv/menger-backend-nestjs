@@ -61,7 +61,6 @@ export class ZoomService {
         meetingRequestHeaders,
       ));
 
-      console.log("Meeting Response:", meetingResponse);
       if (meetingResponse.status !== 201) {
         console.log('Unable to generate meeting link');
         return;

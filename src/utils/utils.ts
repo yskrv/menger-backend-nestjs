@@ -1,18 +1,11 @@
-import { randomBytes } from 'crypto';
-
-export const generateRequestId = (): string => {
-  return randomBytes(16).toString('hex');
+interface ActivationCode {
+  code: string;
+  expiresIn: Date;
 }
 
-const pad = (num: number) => num.toString().padStart(2, '0');
+export const generateActivationCode = (): ActivationCode => {
+  const code: string = Math.floor(100000 + Math.random() * 900000).toString();
+  const expiresIn: Date = new Date(new Date().getTime() + 15 * 60000);
 
-export const formatDateWithOffset = (date: Date, offset: string): string => {
-  const year = date.getFullYear();
-  const month = pad(date.getMonth() + 1);
-  const day = pad(date.getDate());
-  const hours = pad(date.getHours());
-  const minutes = pad(date.getMinutes());
-  const seconds = pad(date.getSeconds());
-  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${offset}`;
-}
-
+  return { code, expiresIn };
+};
