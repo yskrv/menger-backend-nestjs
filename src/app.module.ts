@@ -5,6 +5,8 @@ import { MongooseConfigModule } from './common/database/database.module';
 import { AuthModule } from './resources/auth/auth.module';
 import { ApplicationModule } from './resources/applications/application.module';
 import { TranslateModule } from './resources/translate/translate.module';
+import { TestController } from './resources/test/test.controller';
+import { TextToSpeechService } from './services/text-to-speach.service';
 
 @Module({
   imports: [
@@ -13,8 +15,9 @@ import { TranslateModule } from './resources/translate/translate.module';
     MongooseConfigModule,
     AuthModule,
     ApplicationModule,
-    TranslateModule
+    TranslateModule,
   ],
-  controllers: [],
+  controllers: [TestController],
+  providers: [TextToSpeechService]
 })
 export class AppModule { }
