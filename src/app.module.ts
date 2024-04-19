@@ -7,6 +7,7 @@ import { ApplicationModule } from './resources/applications/application.module';
 import { TranslateModule } from './resources/translate/translate.module';
 import { TestController } from './resources/test/test.controller';
 import { TextToSpeechService } from './services/text-to-speach.service';
+import { GoogleCloudStorageService } from './services/file-storage.service';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { TextToSpeechService } from './services/text-to-speach.service';
     TranslateModule,
   ],
   controllers: [TestController],
-  providers: [TextToSpeechService]
+  providers: [TextToSpeechService, GoogleCloudStorageService]
 })
 export class AppModule { }
