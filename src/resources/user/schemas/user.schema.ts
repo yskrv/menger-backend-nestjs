@@ -39,7 +39,7 @@ export class User {
       expiresIn: { type: Date },
     },
     _id: false,
-    required: false
+    required: false,
   })
   activationCode?: {
     code: string;

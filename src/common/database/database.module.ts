@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ApplicationModule } from 'src/resources/applications/application.module';
-import { UserModule } from 'src/resources/user/user.module';
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { MongooseModule } from "@nestjs/mongoose";
+import { ApplicationModule } from "src/resources/applications/application.module";
+import { CourseModule } from "src/resources/course/course.module";
+import { UserModule } from "src/resources/user/user.module";
 
 const { DB_URL } = process.env;
 
@@ -11,7 +12,8 @@ const { DB_URL } = process.env;
     ConfigModule,
     MongooseModule.forRoot(DB_URL),
     UserModule,
-    ApplicationModule
+    ApplicationModule,
+    CourseModule
   ],
 })
-export class MongooseConfigModule { }
+export class MongooseConfigModule {}

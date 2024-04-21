@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { Storage } from '@google-cloud/storage';
-import { v4 as uuidv4 } from 'uuid';
+import { Injectable } from "@nestjs/common";
+import { Storage } from "@google-cloud/storage";
+import { v4 as uuidv4 } from "uuid";
 
 const {
   GOOGLE_CLOUD_PROJECT_ID,
@@ -8,7 +8,7 @@ const {
   GOOGLE_PRIVATE_KEY,
   GOOGLE_CLIENT_EMAIL,
   GOOGLE_CLIENT_ID,
-  GOOGLE_BUCKET_NAME
+  GOOGLE_BUCKET_NAME,
 } = process.env;
 
 @Injectable()
@@ -17,7 +17,7 @@ export class GoogleCloudStorageService {
   private bucketName: string;
 
   constructor() {
-    const privateKey = GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
+    const privateKey = GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n");
 
     this.storage = new Storage({
       credentials: {
@@ -38,14 +38,14 @@ export class GoogleCloudStorageService {
   ): Promise<string> {
     const bucket = this.storage.bucket(this.bucketName);
 
-    const fileExtension = file.originalname.split('.').pop();
+    const fileExtension = file.originalname.split(".").pop();
     const fileName = `${folderName}/${uuidv4()}.${fileExtension}`;
     const blob = bucket.file(fileName);
     const blobStream = blob.createWriteStream();
 
     await new Promise<void>((resolve, reject) => {
-      blobStream.on('error', (err) => reject(err));
-      blobStream.on('finish', async () => {
+      blobStream.on("error", (err) => reject(err));
+      blobStream.on("finish", async () => {
         await blob.makePublic();
         resolve();
       });
@@ -58,10 +58,10 @@ export class GoogleCloudStorageService {
   async uploadBuffer(
     buffer: Buffer,
     folderName: string,
-    mimetype: string = 'audio/mpeg',
+    mimetype: string = "audio/mpeg",
   ): Promise<string> {
     const bucket = this.storage.bucket(this.bucketName);
-    const fileName = `${folderName}/${uuidv4()}.mp3`; 
+    const fileName = `${folderName}/${uuidv4()}.mp3`;
     const blob = bucket.file(fileName);
     const blobStream = blob.createWriteStream({
       metadata: {
@@ -70,8 +70,8 @@ export class GoogleCloudStorageService {
     });
 
     await new Promise<void>((resolve, reject) => {
-      blobStream.on('error', err => reject(err));
-      blobStream.on('finish', async () => {
+      blobStream.on("error", (err) => reject(err));
+      blobStream.on("finish", async () => {
         await blob.makePublic();
         resolve();
       });
