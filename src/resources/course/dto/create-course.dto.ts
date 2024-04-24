@@ -3,6 +3,14 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from "clas
 
 export class CreateCourseDto {
   @ApiProperty({
+    description: 'Slug of the course',
+    example: 'nest-intro-course'
+  })
+  @IsNotEmpty({ message: 'Slug is required' })
+  @IsString({ message: 'Slug must be a string' })
+  slug: string;
+
+  @ApiProperty({
     description: 'Title of the course',
     example: 'Introduction to NestJS'
   })

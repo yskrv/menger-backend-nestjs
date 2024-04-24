@@ -20,19 +20,15 @@ export class CourseService {
     return await new this.courseModel({ ...rest, imageUrl, benefits: benefits.split(';') }).save();
   }
 
-  findAll() {
-    return `This action returns all course`;
+  async findAll() {
+    return await this.courseModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
+  async findLatest() {
+    return await this.courseModel.find().sort({ createdAt: 1 }).limit(3);
   }
 
-  update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} course`;
+  async findBySlug(slug: string) {
+    return this.courseModel.findOne({ slug });
   }
 }

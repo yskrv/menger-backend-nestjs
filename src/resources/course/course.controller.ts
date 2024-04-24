@@ -35,26 +35,18 @@ export class CourseController {
     return this.courseService.create(dto);
   }
 
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard)
-  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @Get()
   findAll() {
     return this.courseService.findAll();
   }
 
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.courseService.findOne(+id);
+  @Get("/latest")
+  findLatest() {
+    return this.courseService.findLatest();
   }
 
-  @Patch(":id")
-  update(@Param("id") id: string, @Body() updateCourseDto: UpdateCourseDto) {
-    return this.courseService.update(+id, updateCourseDto);
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.courseService.remove(+id);
+  @Get(":slug")
+  findOne(@Param("slug") slug: string) {
+    return this.courseService.findBySlug(slug);
   }
 }
