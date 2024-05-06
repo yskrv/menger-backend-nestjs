@@ -5,6 +5,7 @@ import { ApplicationController } from "./application.controller";
 import { Application, ApplicationSchema } from "./schemas/application.schema";
 import { ZoomService } from "src/services/zoom.service";
 import { HttpModule } from "@nestjs/axios";
+import { MailService } from "src/services/mail.service";
 
 @Module({
   imports: [
@@ -14,6 +15,6 @@ import { HttpModule } from "@nestjs/axios";
     HttpModule,
   ],
   controllers: [ApplicationController],
-  providers: [ApplicationService, ZoomService],
+  providers: [ApplicationService, ZoomService, MailService],
 })
-export class ApplicationModule {}
+export class ApplicationModule { }

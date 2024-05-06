@@ -9,6 +9,7 @@ import { TestController } from "./resources/test/test.controller";
 import { TextToSpeechService } from "./services/text-to-speach.service";
 import { GoogleCloudStorageService } from "./services/file-storage.service";
 import { CourseModule } from "./resources/course/course.module";
+import { LevelModule } from './resources/level/level.module';
 
 @Module({
   imports: [
@@ -19,8 +20,9 @@ import { CourseModule } from "./resources/course/course.module";
     ApplicationModule,
     TranslateModule,
     CourseModule,
+    LevelModule,
   ],
   controllers: [TestController],
   providers: [TextToSpeechService, GoogleCloudStorageService],
 })
-export class AppModule {}
+export class AppModule { }

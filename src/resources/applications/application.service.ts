@@ -4,6 +4,7 @@ import { Model } from "mongoose";
 import { CreateApplicationDto } from "./dto/create-application.dto";
 import { Application, ApplicationDocument } from "./schemas/application.schema";
 import { ZoomService } from "src/services/zoom.service";
+import { MailService } from "src/services/mail.service";
 
 @Injectable()
 export class ApplicationService {
@@ -11,7 +12,8 @@ export class ApplicationService {
     @InjectModel(Application.name)
     private readonly applicationModel: Model<ApplicationDocument>,
     private readonly zoomService: ZoomService,
-  ) {}
+    private readonly mailService: MailService,
+  ) { }
 
   async create(dto: CreateApplicationDto) {
     const response = await this.zoomService.createMeeting(
@@ -21,6 +23,9 @@ export class ApplicationService {
     dto.meetingJoinUrl = response.joinUrl;
     dto.meetingStartUrl = response.startUrl;
     const application = new this.applicationModel(dto);
+
+    await this.mailService.sendZoomLink(application.email, application.fullName, application.meetingJoinUrl, application.meetingDate.toString());
+
     return application.save();
   }
 }

@@ -3,9 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete,
   UseGuards,
   UseInterceptors,
   UploadedFile,
@@ -14,7 +12,6 @@ import { ApiBearerAuth, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { CourseService } from "./course.service";
 import { CreateCourseDto } from "./dto/create-course.dto";
-import { UpdateCourseDto } from "./dto/update-course.dto";
 import { AuthGuard } from "src/guards/auth.guard";
 import { Roles } from "src/common/decorators/roles.decorator";
 import { UserRole } from "src/utils/enums";

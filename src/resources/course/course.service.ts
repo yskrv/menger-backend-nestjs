@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { Course, CourseDocument } from "./schemas/course.schema";
 import { CreateCourseDto } from "./dto/create-course.dto";
 import { UpdateCourseDto } from "./dto/update-course.dto";
@@ -29,6 +29,10 @@ export class CourseService {
   }
 
   async findBySlug(slug: string) {
-    return this.courseModel.findOne({ slug });
+    return this.courseModel.findOne({ slug }).populate('levels');
+  }
+
+  async addLevelToCourse(courseId: Types.ObjectId, levelId: Types.ObjectId) {
+    return await this.courseModel.findByIdAndUpdate(courseId, { $addToSet: { levels: levelId } });
   }
 }

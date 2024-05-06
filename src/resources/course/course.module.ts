@@ -13,5 +13,6 @@ import { Course, CourseSchema } from "./schemas/course.schema";
   ],
   controllers: [CourseController],
   providers: [CourseService, GoogleCloudStorageService],
+  exports: [CourseService]
 })
 export class CourseModule { }
