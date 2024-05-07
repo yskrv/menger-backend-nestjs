@@ -35,9 +35,9 @@ export class CreateWordDto {
     example: 'həˈləʊ',
     required: true
   })
+  @IsNotEmpty({ message: 'Transcription must not be empty.' })
   @IsString({ message: 'Transcription must be string' })
-  @IsOptional()
-  transcription?: string;
+  transcription: string;
 
   @ApiProperty({
     enum: VoiceType,
