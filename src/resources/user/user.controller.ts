@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { UserService } from "./user.service";
 import { AuthGuard } from "src/guards/auth.guard";
@@ -14,5 +14,19 @@ export class UserController {
   @Get("/me")
   getMe(@JwtToken() token) {
     return this.userService.findByToken(token);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Patch("/dictionary/:id")
+  addWordToDictionary(@JwtToken() token, @Param("id") id: string) {
+    return this.userService.addWordToDictionary(token, id);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Get("/dictionary")
+  getDictionaryOfUser(@JwtToken() token) {
+    return this.userService.getDictionaryOfUser(token);
   }
 }

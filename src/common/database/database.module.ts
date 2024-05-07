@@ -5,6 +5,7 @@ import { ApplicationModule } from "src/resources/applications/application.module
 import { CourseModule } from "src/resources/course/course.module";
 import { LevelModule } from "src/resources/level/level.module";
 import { UserModule } from "src/resources/user/user.module";
+import { WordModule } from "src/resources/word/word.module";
 
 const { DB_URL } = process.env;
 
@@ -15,7 +16,8 @@ const { DB_URL } = process.env;
     UserModule,
     ApplicationModule,
     CourseModule,
-    LevelModule
+    LevelModule,
+    WordModule
   ],
 })
 export class MongooseConfigModule { }

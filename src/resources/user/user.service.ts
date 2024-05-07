@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { JwtService } from "@nestjs/jwt";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User, UserDocument } from "./schemas/user.schema";
 
@@ -13,18 +13,17 @@ export class UserService {
     private readonly jwtService: JwtService,
   ) { }
 
-  create(dto: CreateUserDto) {
-    const user = new this.userModel(dto);
-    return user.save();
+  async create(dto: CreateUserDto) {
+    return await new this.userModel(dto).save();
   }
 
   async findByEmail(email: string) {
-    return this.userModel.findOne({ email });
+    return await this.userModel.findOne({ email });
   }
 
   async findByToken(token: string) {
     const decodedToken = this.jwtService.decode(token);
-    return this.userModel.findById(decodedToken.id);
+    return await this.userModel.findById(decodedToken.id);
   }
 
   async activateUserByActivationCode(userId: string, activationCode: string) {
@@ -36,5 +35,15 @@ export class UserService {
       await user.save();
       return user;
     }
+  }
+
+  async addWordToDictionary(token: string, wordId: string) {
+    const decodedToken = this.jwtService.decode(token);
+    return await this.userModel.findByIdAndUpdate(decodedToken.id, { $addToSet: { dictionary: wordId } }, { new: true });
+  }
+
+  async getDictionaryOfUser(token: string) {
+    const decodedToken = this.jwtService.decode(token);
+    return await this.userModel.findById(decodedToken.id).populate("dictionary");
   }
 }

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { HydratedDocument } from "mongoose";
+import { HydratedDocument, Types } from "mongoose";
 import { UserRole } from "src/utils/enums";
 
 export type UserDocument = HydratedDocument<User>;
@@ -20,6 +20,9 @@ export class User {
 
   @Prop({ enum: UserRole, default: UserRole.STUDENT })
   role: UserRole;
+
+  @Prop({ required: false, type: [Types.ObjectId], ref: "Word" })
+  dictionary: { required: false, type: Types.ObjectId[], ref: "Word" };
 
   @Prop({ required: false })
   profilePictureUrl: string;

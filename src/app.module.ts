@@ -10,6 +10,7 @@ import { TextToSpeechService } from "./services/text-to-speach.service";
 import { GoogleCloudStorageService } from "./services/file-storage.service";
 import { CourseModule } from "./resources/course/course.module";
 import { LevelModule } from './resources/level/level.module';
+import { WordModule } from './resources/word/word.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { LevelModule } from './resources/level/level.module';
     TranslateModule,
     CourseModule,
     LevelModule,
+    WordModule,
   ],
   controllers: [TestController],
   providers: [TextToSpeechService, GoogleCloudStorageService],

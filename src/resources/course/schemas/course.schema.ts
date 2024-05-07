@@ -5,7 +5,7 @@ export type CourseDocument = HydratedDocument<Course>;
 
 @Schema({ collection: "courses", timestamps: true })
 export class Course {
-  @Prop()
+  @Prop({ unique: true })
   slug: string;
 
   @Prop()
