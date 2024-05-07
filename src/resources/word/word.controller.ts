@@ -17,7 +17,7 @@ export class WordController {
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
   @UseGuards(AuthGuard)
-  @Roles(UserRole.ADMIN, UserRole.TEACHER)
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @Post()
   create(@UploadedFile() file: Express.Multer.File, @Body() dto: CreateWordDto) {
     dto.file = file;

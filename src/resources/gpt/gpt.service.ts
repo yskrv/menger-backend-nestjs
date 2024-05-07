@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
-import { GenerateTranscriptionOfWordDto } from "./dto/generate-transcription-word.dto";
+import { GptWordDto } from "./dto/gpt-word.dto";
 
 @Injectable()
 export class GptService {
@@ -37,9 +37,15 @@ export class GptService {
     }
   }
 
-  async generateTranscriptionOfWord(dto: GenerateTranscriptionOfWordDto) {
-    const propmt =
+  async generateTranscriptionOfWord(dto: GptWordDto) {
+    const prompt =
       `Write the transcription of the word \`${dto.word}\` using the International Phonetic Alphabet (IPA). Example: For the word \`hello\`, the transcription is \`həˈloʊ\`. Please provide the transcription for \`${dto.word}\`. Response should be like object with field 'transcription'`;
-    return await this.sendRequestToGpt(propmt);
+    return await this.sendRequestToGpt(prompt);
+  }
+
+  async generateWrongOptionsForWordsTask(dto: GptWordDto) {
+    const prompt =
+      `Provide three incorrect translation options for the word \`${dto.word}\` (given in either English or Kazakh). These options should be in the opposite language of the provided word. For example, if \`${dto.word}\` is in English, provide wrong options in Kazakh, and vice versa. Response should be like object with field 'wrongOptions', which contain array with 3 strings.`;
+    return await this.sendRequestToGpt(prompt);
   }
 }

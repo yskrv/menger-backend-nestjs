@@ -14,7 +14,7 @@ export class LevelController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  @Roles(UserRole.ADMIN, UserRole.TEACHER)
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @Post()
   create(@Body() createLevelDto: CreateLevelDto) {
     return this.levelService.create(createLevelDto);
@@ -27,12 +27,12 @@ export class LevelController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.levelService.findOne(+id);
+    return this.levelService.findOne(id);
   }
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  @Roles(UserRole.ADMIN, UserRole.TEACHER)
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLevelDto: UpdateLevelDto) {
     return this.levelService.update(+id, updateLevelDto);

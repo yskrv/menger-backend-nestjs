@@ -4,7 +4,9 @@ import { Model } from 'mongoose';
 import { Level, LevelDocument } from './schemas/level.schema';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
+import { AddWordsTaskDto } from './dto/add-words-task.dto'
 import { CourseService } from '../course/course.service';
+;
 
 @Injectable()
 export class LevelService {
@@ -22,12 +24,16 @@ export class LevelService {
     return newLevel;
   }
 
+  async addWordsTaskToLevel(dto: AddWordsTaskDto) {
+    return await this.levelModel.findByIdAndUpdate(dto.levelId, { $addToSet: { wordsTasks: dto.wordsTaskId } }, { new: true });
+  }
+
   findAll() {
     return `This action returns all level`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} level`;
+  async findOne(id: string) {
+    return await this.levelModel.findById(id).populate('wordsTasks');
   }
 
   async update(id: number, dto: UpdateLevelDto) {

@@ -11,7 +11,7 @@ export class LoginUserDto {
 
   @ApiProperty({
     description: "The password for the user account",
-    example: "Qwerty123!",
+    example: "Adil123!",
   })
   @IsString({ message: "Password must be a string" })
   @IsStrongPassword({ minUppercase: 1, minLowercase: 1, minLength: 8, minNumbers: 1, minSymbols: 1 }, { message: "Your password should contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 symbol" })

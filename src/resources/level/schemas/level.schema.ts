@@ -14,8 +14,11 @@ export class Level {
   @Prop()
   order: number;
 
-  @Prop({ type: Types.ObjectId, ref: "Course" })
-  courseId: { required: false; type: Types.ObjectId; ref: "Course" };
+  @Prop({ required: true, type: Types.ObjectId, ref: "Course" })
+  courseId: Types.ObjectId;
+
+  @Prop({ required: true, type: [Types.ObjectId], ref: "WordsTask", default: [] })
+  wordsTasks: Types.ObjectId[];
 }
 
 export const LevelSchema = SchemaFactory.createForClass(Level);

@@ -14,5 +14,6 @@ import { CourseModule } from '../course/course.module';
   ],
   controllers: [LevelController],
   providers: [LevelService],
+  exports: [LevelService]
 })
 export class LevelModule { }

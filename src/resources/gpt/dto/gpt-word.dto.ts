@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-export class GenerateTranscriptionOfWordDto {
+export class GptWordDto {
   @ApiProperty({
     description: 'The word to be transcribed',
     example: 'apple'

@@ -12,6 +12,7 @@ import { CourseModule } from "./resources/course/course.module";
 import { LevelModule } from './resources/level/level.module';
 import { WordModule } from './resources/word/word.module';
 import { GptModule } from "./resources/gpt/gpt.module";
+import { WordsTaskModule } from './resources/words-task/words-task.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { GptModule } from "./resources/gpt/gpt.module";
     CourseModule,
     LevelModule,
     WordModule,
-    GptModule
+    GptModule,
+    WordsTaskModule
   ],
   controllers: [TestController],
   providers: [TextToSpeechService, GoogleCloudStorageService],
