@@ -24,7 +24,6 @@ export class AuthService {
 
   async register(dto: CreateUserDto) {
     const { email, password } = dto;
-    console.log(dto);
     const candidate = await this.userService.findByEmail(email);
     if (candidate) {
       throw new HttpException("Email is already taken", HttpStatus.BAD_REQUEST);
@@ -32,7 +31,6 @@ export class AuthService {
 
     const hashedPassword = await hashPassword(password);
     const passwordIsValid = await isValidPassword(password, hashedPassword);
-    console.log(passwordIsValid);
     const activationCode = generateActivationCode();
     await this.mailService.sendActivationCode(
       dto.email,
@@ -54,7 +52,6 @@ export class AuthService {
     const user = await this.userService.findByEmail(email);
 
     const passwordIsValid = await isValidPassword(password, user.password);
-    console.log(user);
     if (!user || !passwordIsValid) {
       throw new UnauthorizedException("Email or password incorrect");
     }

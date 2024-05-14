@@ -17,7 +17,6 @@ export class WordsTaskController {
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @Post()
   create(@Body() dto: CreateWordsTaskDto) {
-    console.log(dto);
     return this.wordsTaskService.create(dto);
   }
 

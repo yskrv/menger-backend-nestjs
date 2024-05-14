@@ -36,6 +36,12 @@ export class User {
   @Prop({ default: false })
   isActivated: boolean;
 
+  @Prop({ required: false, type: [Types.ObjectId], ref: "Course" })
+  cart: Types.ObjectId[];
+
+  @Prop({ required: false, type: [Types.ObjectId], ref: "Course" })
+  courses: Types.ObjectId[];
+
   @Prop({
     type: {
       code: { type: String, match: /^\d{6}$/ },
