@@ -38,6 +38,7 @@ export class UpdateOrganizationDto {
     description: 'Image of the organization',
   })
   @IsString({ message: 'Image name must be a string' })
+  @IsOptional()
   imageUrl?: string;
 
 }

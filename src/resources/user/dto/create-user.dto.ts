@@ -1,4 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsOptional } from "class-validator";
+import { UserRole } from "src/utils/enums";
 
 export class CreateUserDto {
   @ApiProperty({
@@ -25,16 +27,22 @@ export class CreateUserDto {
   })
   password: string;
 
-  // @ApiProperty({
-  //   description: 'Code for account activation',
-  //   example: {
-  //     code: "123456",
-  //     expiresIn: new Date()
-  //   },
-  //   required: false
-  // })
-  activationCode: {
+  @ApiProperty({
+    description: 'Code for account activation',
+    example: {
+      code: "123456",
+      expiresIn: new Date()
+    },
+  })
+  @IsOptional()
+  activationCode?: {
     code: string;
     expiresIn: Date;
   };
+
+  @IsOptional()
+  isActivated?: boolean;
+
+  @IsOptional()
+  role?: UserRole;
 }

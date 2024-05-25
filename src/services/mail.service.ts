@@ -53,4 +53,21 @@ export class MailService {
 
     return this.transporter.sendMail(mailOptions);
   }
+
+  async sendUserCredentials(to: string, name: string, organization: string, password: string) {
+    const templatePath = path.join(
+      __dirname,
+      "../templates/userCredentials.ejs",
+    );
+    const html = await ejs.renderFile(templatePath, { name, organization, email: to, password });
+
+    const mailOptions = {
+      from: `"Men'ger" <${NODEMAILER_EMAIL}>`,
+      to,
+      subject: "Қолданушыдың кіру деректері",
+      html,
+    };
+
+    return this.transporter.sendMail(mailOptions);
+  }
 }

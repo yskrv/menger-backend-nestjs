@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreateOrganizationDto {
   @ApiProperty({
-    description: 'Name of the course',
+    description: 'Name of the organization',
     example: 'Astana IT University'
   })
   @IsNotEmpty({ message: 'Name is required' })
