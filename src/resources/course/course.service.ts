@@ -3,7 +3,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { Course, CourseDocument } from "./schemas/course.schema";
 import { CreateCourseDto } from "./dto/create-course.dto";
-import { UpdateCourseDto } from "./dto/update-course.dto";
 import { GoogleCloudStorageService } from "src/services/file-storage.service";
 
 @Injectable()

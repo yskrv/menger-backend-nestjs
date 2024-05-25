@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { JwtService } from "@nestjs/jwt";
-import { Model, Types } from "mongoose";
+import { Model } from "mongoose";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User, UserDocument } from "./schemas/user.schema";
 
@@ -52,7 +52,7 @@ export class UserService {
     return await this.userModel.findByIdAndUpdate(decodedToken.id, { $addToSet: { cart: courseId } }, { new: true }).populate("cart");
   }
 
-  async removeCourseToCart(token: string, courseId: string) {
+  async removeCourseFromCart(token: string, courseId: string) {
     const decodedToken = this.jwtService.decode(token);
     return await this.userModel.findByIdAndUpdate(decodedToken.id, { $pull: { cart: courseId } }, { new: true }).populate("cart");
   }

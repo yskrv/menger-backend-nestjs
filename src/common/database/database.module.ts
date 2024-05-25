@@ -7,6 +7,7 @@ import { LevelModule } from "src/resources/level/level.module";
 import { UserModule } from "src/resources/user/user.module";
 import { WordModule } from "src/resources/word/word.module";
 import { WordsTaskModule } from "src/resources/words-task/words-task.module";
+import { OrganizationModule } from "src/resources/organization/organization.module";
 
 const { DB_URL } = process.env;
 
@@ -19,7 +20,8 @@ const { DB_URL } = process.env;
     CourseModule,
     LevelModule,
     WordModule,
-    WordsTaskModule
+    WordsTaskModule,
+    OrganizationModule
   ],
 })
 export class MongooseConfigModule { }

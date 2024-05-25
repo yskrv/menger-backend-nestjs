@@ -19,6 +19,7 @@ export class UserController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
+  @Student()
   @Patch("/dictionary/:id")
   addWordToDictionary(@JwtToken() token: string, @Param("id") id: string) {
     return this.userService.addWordToDictionary(token, id);
@@ -43,8 +44,8 @@ export class UserController {
   @UseGuards(AuthGuard)
   @Student()
   @Delete("/cart/:id")
-  removeCourseToCart(@JwtToken() token: string, @Param("id") id: string) {
-    return this.userService.removeCourseToCart(token, id);
+  removeCourseFromCart(@JwtToken() token: string, @Param("id") id: string) {
+    return this.userService.removeCourseFromCart(token, id);
   }
 
   @ApiBearerAuth()

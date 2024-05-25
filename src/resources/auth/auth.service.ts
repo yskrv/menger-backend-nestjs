@@ -26,11 +26,10 @@ export class AuthService {
     const { email, password } = dto;
     const candidate = await this.userService.findByEmail(email);
     if (candidate) {
-      throw new HttpException("Email is already taken", HttpStatus.BAD_REQUEST);
+      throw new HttpException("Email is already taken", HttpStatus.CONFLICT);
     }
 
     const hashedPassword = await hashPassword(password);
-    const passwordIsValid = await isValidPassword(password, hashedPassword);
     const activationCode = generateActivationCode();
     await this.mailService.sendActivationCode(
       dto.email,

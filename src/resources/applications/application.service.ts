@@ -5,6 +5,7 @@ import { CreateApplicationDto } from "./dto/create-application.dto";
 import { Application, ApplicationDocument } from "./schemas/application.schema";
 import { ZoomService } from "src/services/zoom.service";
 import { MailService } from "src/services/mail.service";
+import { OrganizationService } from "../organization/organization.service";
 
 @Injectable()
 export class ApplicationService {
@@ -13,6 +14,7 @@ export class ApplicationService {
     private readonly applicationModel: Model<ApplicationDocument>,
     private readonly zoomService: ZoomService,
     private readonly mailService: MailService,
+    private readonly organizationService: OrganizationService
   ) { }
 
   async create(dto: CreateApplicationDto) {
@@ -26,6 +28,21 @@ export class ApplicationService {
 
     await this.mailService.sendZoomLink(application.email, application.fullName, application.meetingJoinUrl, application.meetingDate.toString());
 
-    return application.save();
+    return await application.save();
+  }
+
+  async getAll() {
+    return await this.applicationModel.find({ isAccepted: { $exists: false } });
+  }
+
+  async acceptApplication(id: string) {
+    const application = await this.applicationModel.findByIdAndUpdate(id, { isAccepted: true });
+    await this.organizationService.create({ name: application.organizationName });
+    return application;
+  }
+
+  async denyApplication(id: string) {
+    const application = await this.applicationModel.findByIdAndUpdate(id, { isAccepted: false });
+    return application;
   }
 }

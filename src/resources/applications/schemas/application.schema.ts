@@ -26,7 +26,7 @@ export class Application {
   @Prop()
   meetingJoinUrl: string;
 
-  @Prop({ default: false })
+  @Prop()
   isAccepted: boolean;
 
   @Prop({ type: Date })

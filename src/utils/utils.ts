@@ -20,3 +20,7 @@ export const formatDate = (dateString: string): string => {
 
   return `${day}.${month}.${year} ${hours}:${minutes}`;
 }
+
+export const convertToSlug = (text: string): string => {
+  return text.toLowerCase().replace(/\s+/g, '-');
+}
