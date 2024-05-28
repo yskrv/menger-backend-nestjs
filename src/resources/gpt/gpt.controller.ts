@@ -19,6 +19,9 @@ export class GptController {
     return this.gptService.generateTranscriptionOfWord(dto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Roles(UserRole.MANAGER, UserRole.ADMIN)
   @Post('/wrongOptions')
   generateWrongOptionsForWordsTask(@Body() dto: GptWordDto) {
     return this.gptService.generateWrongOptionsForWordsTask(dto);

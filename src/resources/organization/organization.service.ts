@@ -61,4 +61,8 @@ export class OrganizationService {
     await this.mailService.sendUserCredentials(dto.email, `${dto.firstName} ${dto.lastName}`, organization.name, password);
     return user;
   }
+
+  async addCourseToOrganization(organizationId: string, courseId: string) {
+    return await this.organizationModel.findByIdAndUpdate(organizationId, { $addToSet: { courses: courseId } }, { new: true });
+  }
 }

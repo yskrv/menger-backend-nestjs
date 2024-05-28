@@ -26,8 +26,8 @@ export class Course {
   @Prop({ default: true })
   isPublic: boolean;
 
-  @Prop({ required: false, type: Types.ObjectId, ref: "User" })
-  organizationId: { required: false; type: Types.ObjectId; ref: "User" };
+  @Prop({ required: false, type: Types.ObjectId, ref: "Organization" })
+  organizationId: { required: false; type: Types.ObjectId; ref: "Organization" };
 
   @Prop({ required: false, type: [Types.ObjectId], ref: "Level" })
   levels: { required: false, type: Types.ObjectId[], ref: "Level" };

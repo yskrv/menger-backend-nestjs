@@ -22,6 +22,9 @@ export class WordsTask {
 
   @Prop()
   isKazakh: boolean;
+
+  @Prop({ required: true, type: Types.ObjectId, ref: "Course" })
+  courseId: Types.ObjectId;
 }
 
 export const WordsTaskSchema = SchemaFactory.createForClass(WordsTask);

@@ -17,8 +17,8 @@ export class WordsTaskService {
 
   async create(dto: CreateWordsTaskDto) {
     const newWordsTask = await new this.wordsTaskModel(dto).save();
-    await this.levelService.addWordsTaskToLevel({ levelId: dto.levelId, wordsTaskId: newWordsTask._id })
-    return newWordsTask;
+    const level = await this.levelService.addWordsTaskToLevel({ levelId: dto.levelId, wordsTaskId: newWordsTask._id })
+    return await this.wordsTaskModel.findByIdAndUpdate(newWordsTask._id, { courseId: level.courseId }, { new: true });
   }
 
   findAll() {

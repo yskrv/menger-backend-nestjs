@@ -24,6 +24,9 @@ export class WordController {
     return this.wordService.create(dto);
   }
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
+  @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @Get()
   findAll() {
     return this.wordService.findAll();

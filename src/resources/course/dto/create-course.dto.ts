@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from "class-validator";
+import { IsBoolean, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from "class-validator";
 
 export class CreateCourseDto {
   @ApiProperty({
@@ -35,18 +35,23 @@ export class CreateCourseDto {
 
   @ApiProperty({
     description: 'Price of the course',
-    example: 50.00
+    example: 50
   })
-  @IsNumber({}, { message: 'Price must be a number' })
-  @Min(0, { message: 'Price must be a non-negative number' })
   price: number;
 
   @ApiProperty({
     description: 'Visibility of the course',
     example: true
   })
-  @IsBoolean({ message: 'isPublic must be a boolean' })
   isPublic: boolean;
+
+  @ApiProperty({
+    description: 'OrganizationId of the course',
+    required: false
+  })
+  @IsMongoId({ message: 'OrganizationId must be a MongoId' })
+  @IsOptional()
+  organizationId?: string;
 
   @ApiProperty({
     type: 'string',

@@ -5,7 +5,7 @@ const { GOOGLE_TRANSLATE_API_KEY } = process.env;
 
 @Injectable()
 export class TranslateService {
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService) { }
 
   async translate(text: string, targetLang: string): Promise<any> {
     const url = `https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_TRANSLATE_API_KEY}`;
@@ -17,7 +17,7 @@ export class TranslateService {
 
     try {
       const axiosResponse = await this.httpService.axiosRef.post(url, data);
-      return axiosResponse.data.data.translations;
+      return axiosResponse.data.data.translations[0];
     } catch (error) {
       console.error("Error during translation:", error);
       throw new HttpException(

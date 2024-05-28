@@ -24,8 +24,8 @@ export class WordService {
     return await new this.wordModel({ eng, kaz, transcription, audioUrl, imageUrl }).save();
   }
 
-  findAll() {
-    return `This action returns all word`;
+  async findAll() {
+    return await this.wordModel.find();
   }
 
   findOne(id: number) {

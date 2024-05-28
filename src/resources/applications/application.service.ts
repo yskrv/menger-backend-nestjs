@@ -32,7 +32,7 @@ export class ApplicationService {
   }
 
   async getAll() {
-    return await this.applicationModel.find({ isAccepted: { $exists: false } });
+    return await this.applicationModel.find();
   }
 
   async acceptApplication(id: string) {

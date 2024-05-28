@@ -35,7 +35,7 @@ export class LevelController {
   @Roles(UserRole.ADMIN, UserRole.MANAGER)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLevelDto: UpdateLevelDto) {
-    return this.levelService.update(+id, updateLevelDto);
+    return this.levelService.update(id, updateLevelDto);
   }
 
   @Delete(':id')

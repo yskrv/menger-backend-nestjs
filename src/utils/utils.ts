@@ -46,3 +46,10 @@ export const generatePassword = (length: number = 10): string => {
 
   return password.split('').sort(() => 0.5 - Math.random()).join('');
 }
+
+export const ensureBoolean = (value: boolean | string): boolean => {
+  if (typeof value === "string") {
+    return value.toLowerCase() === "true";
+  }
+  return value;
+}

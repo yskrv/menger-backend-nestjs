@@ -36,7 +36,7 @@ export class LevelService {
     return await this.levelModel.findById(id).populate('wordsTasks');
   }
 
-  async update(id: number, dto: UpdateLevelDto) {
+  async update(id: string, dto: UpdateLevelDto) {
     return await this.levelModel.findByIdAndUpdate(id, dto);
   }
 
